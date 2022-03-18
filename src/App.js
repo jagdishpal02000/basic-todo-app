@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useRef, useState } from "react";
+import Task from "./task";
 
-function App() {
+// const tasks = ["hii", "jagdish", "happy holi"];
+const App = () => {
+  const [tasks, setTasks] = useState([]);
+  const [userInput, setUserInput] = useState("");
+  const enteredTask = useRef(null);
+
+  const taskAdder = () => {
+    if (userInput.length) {
+      setTasks((prev_tasks) => {
+        return [...prev_tasks, userInput];
+      });
+      setUserInput("");
+    } else {
+      enteredTask.current.select();
+    }
+  };
+
+  useEffect(() => {
+    enteredTask.current.select();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1 className="header">ToDo</h1>
+      <div className="task-adder">
+        <input
+          ref={enteredTask}
+          value={userInput}
+          onChange={(e) => {
+            setUserInput(e.target.value);
+          }}
+          type="text"
+        />
+        <button onClick={taskAdder}>Add Task</button>
+      </div>
+      <section className="task-list">
+        {tasks.map((task) => {
+          return <Task task={task} />;
+        })}
+      </section>
+    </>
   );
-}
+};
 
 export default App;
