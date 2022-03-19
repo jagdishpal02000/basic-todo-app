@@ -85,16 +85,31 @@ body {
 
 .title {
   padding-right: 15px;
+  border: 0px;
+  outline: none !important;
+  font-weight: bold;
+  font-size: 22px;
+  color: var(--primary-color);
 }
 
 .trash {
-  color: red;
+  color: var(--primary-color);
   padding-right: 10px;
 }
 
-.edit {
-  color: green;
-  text-align: right;
-
+.trash :hover {
+  color: red;
   padding-right: 10px;
+  cursor: pointer;
+}
+
+.edit {
+  color: greren;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.edit :hover {
+  color: green;
+  cursor: pointer;
 }
